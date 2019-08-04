@@ -1,0 +1,43 @@
+Sub ticker()
+
+Dim ticker As String
+Dim rownumber As Double
+Dim total As Double
+Dim ws As Worksheet
+
+rownumber = 2
+total = 0
+
+For Each ws In Worksheets
+
+Range("J1").Value = "Ticker"
+Range("K1").Value = "Yearly Volume"
+
+    For i = 2 To 70926
+
+         If Cells(i - 1, 1) = Cells(i, 1) And Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+         
+         ticker = Cells(i, 1).Value
+         
+         total = total + Cells(i, 7).Value
+         
+         Range("J" & rownumber).Value = ticker
+         
+         Range("K" & rownumber).Value = total
+         
+         rownumber = rownumber + 1
+         
+         total = 0
+        
+        Else
+         
+             total = total + Cells(i, 7).Value
+         
+    
+        End If
+
+    Next i
+    
+Next ws
+
+End Sub
